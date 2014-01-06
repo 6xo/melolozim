@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{Title}</title>
+		<link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Expletus+Sans' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			<!--
+			body {
+				margin:0;
+				padding:0;
+				font-size:16px;
+				color:#000;
+				background:#fbfbfb;
+			}
+	
+			.page-title {
+				color:#222;
+				font-size:x-large;
+			}
+
+			#wrapper {
+				margin: 0 auto;
+				width:900px;
+			}
+
+			.blog-title {
+				text-align:center;
+				font-family: 'Orbitron', sans-serif;
+			}
+
+			.blog-title h1 {
+				font-size:xx-large;
+			}
+
+			.blog-title a:link {
+				text-decoration: none;
+				color:#818181;
+			}
+
+			.blog-title a:visited {
+				color:#818181;
+			}
+
+			.header-nav {
+				font-family: 'Orbitron', sans-serif;
+				text-align:right;
+				margin:0 4px 10px 0;
+			}
+
+			.header-nav a {
+				padding:4px;
+			}
+
+			#posts {
+				clear:both;
+				border-top:solid 2px #d3d3d3;
+			}
+
+			.post {
+				padding-bottom:32px;
+			}
+
+			.social-button {
+				border-bottom:solid 2px #d3d3d3;
+			}
+
+			.photo {
+				margin:28px;
+			}
+
+			.entry-blog-title {
+				float:left;
+			}
+
+			.entry-blog-title a:link {
+				color:#696969;
+				text-decoration: none;
+			}
+
+			.post-time {
+				margin-top:36px;
+				float:right;
+				font-family:'Dosis', sans-serif;
+			}
+
+			.entry-content {
+				clear:both;
+			}
+
+			.contents-li {
+				list-style:none;
+			}
+
+			.entry-content, .meta {
+				margin:auto 50px;
+			}
+
+			.meta {
+				font-family:'Dosis', sans-serif;
+			}
+
+			#pager {
+				margin-top:36px;
+				margin-bottom:36px;
+				text-align:center;
+			}
+
+			.copyright {
+				float:right;
+				font-family: 'Expletus Sans', cursive;
+			}
+			
+			-->
+		</style>
+	</head>
+	<body>
+		<style>
+		{CustomCSS}
+		</style>
+		
+		<div id="wrapper">
+			<header class="header">
+				<div class="blog-title">
+					<h1 class="page-title"><a href="/">{Title}</a></h1>
+					{block:Description}
+						<p>{Description}</p>
+					{/block:Description}
+				</div>						
+				<nav class="header-nav">
+					<a href="/">Home</a>
+					{block:HashTags}
+						{block:Pages}
+							<a href="{URL}">{Label}</a>
+						{/block:Pages}
+					{/block:HashTags}
+					<a href="/archive">Archive</a>
+					<a href="{RSS}">RSS</a>
+				</nav>
+			</header>
+			
+			<div id="posts">
+				{block:Posts}
+			
+				<!-- Text -->
+				{block:Text}
+				<li class="post text contents-li">
+					<header>				
+						{block:Title}
+							<h1 class="entry-blog-title"><a href="{Permalink}">{Title}</a></h1>
+						{/block:Title}
+						<span class="post-time">{Year}-{MonthNumber}-{DayOfMonth}</span>
+					</header>
+				
+					<div class="entry-content">
+						{Body}
+					</div>
+				
+					<!-- footer -->
+					<footer class="entry-footer">
+						<div class="meta">
+							{block:NoteCount}
+								<span>
+									<a href="{Permalink}">{NoteCount} Notes</a>
+								</span>
+							{/block:NoteCount}
+				
+							{block:HashTags}
+								<span>
+									<a href="{TagURL}">#{Tag}</a>
+								</span>
+							{/block:HashTags}
+						</div>
+					</footer>
+				</li>
+				{/block:Text}
+				
+				<!-- Photo -->
+				{block:Photo}
+				<div class="post photo">
+					<div class="entry-content">
+						{LinkOpenTag}
+							<img src="{PhotoURL-500}" alt="{PhotoAlt}">
+						{LinkCloseTag}
+						<footer>
+							{block:Caption}
+								{Caption}
+							{/block:Caption}
+							{block:ContentSource}
+							source:<a href="{SourceURL}">{block:NoSourceLogo}{SourceTitle}{/block:NoSourceLogo}</a>
+							{/block:ContentSource}
+						</div>
+						<div class="meta">
+							<span><a href="{Permalink}">Permalink</a></span>
+							<span>{TimeAgo}</span>
+							{block:RebloggedFrom}
+								<span>Reblogged from <a href="{ReblogParentURL}">{ReblogParentName}</a></span>
+							{/block:RebloggedFrom}
+							{block:NoteCount}
+								<span><a href="{Permalink}">{NoteCount} Notes</a></span>
+							{/block:NoteCount}
+							{block:HasTags}
+								<span>
+									{block:Tags}
+										<a href="{TagURL}">#{Tag}</a>
+									{/block:Tags}
+								</span>
+							{/block:HasTags}
+						</div><!-- meta -->
+						{block:PostNotes}
+							{PostNotes}
+						{/block:PostNotes}
+					</footer>
+				</div>
+				{/block:Photo}
+				<div class="social-button">
+					<a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja">ツイート</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+				</div>
+	
+				{/block:Posts}
+			</div><!-- posts -->
+			<div id="pager">
+				{block:PreviousPage}
+					<a href="{PreviousPage}"><<</a>
+				{/block:PreviousPage}
+				{block:NextPage}
+			 		<a href="{NextPage}" class="next" rel="next">>></a>
+				{/block:NextPage}
+			</div>
+			
+			<div class="copyright">
+				©2013-2014 {Title}
+				<a href="https://github.com/6xo/melolozim" target="_blank">melolozim</a> theme designed by <a href="http://6xox.net" target="_blank">6xo.net</a>
+			</div>
+			
+		</div><!-- wrapper -->
+	</body>
+</html>
